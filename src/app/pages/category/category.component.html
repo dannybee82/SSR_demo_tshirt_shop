@@ -1,0 +1,39 @@
+@if (showLoadingDialog()) {
+    <app-loading-dialog />
+}<div class="category-page" [class]="this.backgroundGradient()">
+    <div class="row fx-center">
+        <div class="col w-25">
+            <app-home-logo></app-home-logo>
+            <img src="icons/back-button.png" alt="Back button" [routerLink]="['/']" class="back-button mb-1 mt-1">
+             @if(this.category()) {
+                <img [src]="this.category()!.bannerImage" [alt]="this.category()!.name" [title]="this.category()!.name" class="category-banner mb-1" />
+                <div class="bg-light p-1">
+                    <em>{{ this.category()!.description }}</em>
+                </div>
+            }
+        </div>
+        <div class="col w-50">
+            <div class="row fx-center">
+                <div class="products-grid">
+                    @if(this.products().length > 0) {
+                        @for(product of this.products(); track product.id) {
+                            <div class="product-item p-1" [routerLink]="['/product', product.id]" (click)="this.showLoadingDialog.set(true)">
+                                <div class="col fx-align-center" [routerLink]="['/product', product.id]" (click)="this.showLoadingDialog.set(true)">
+                                    <img 
+                                        [src]="product.thumbnail" 
+                                        [alt]="product.name" 
+                                        [title]="product.name" 
+                                        [routerLink]="['/product', product.id]" 
+                                        class="thumbnail-image"
+                                        (click)="this.showLoadingDialog.set(true)">
+                                    <h3 [routerLink]="['/product', product.id]" class="product-name" (click)="this.showLoadingDialog.set(true)">{{ product.name }}</h3>
+                                    <h4>Price: {{ product.price | currency: 'EUR':"symbol":".2-2" }}</h4>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>

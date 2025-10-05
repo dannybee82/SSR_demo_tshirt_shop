@@ -1,0 +1,65 @@
+/* You can add global styles to this file, and also import other style files */
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.fx-center {
+    justify-content: center;
+}
+
+.fx-align-center {
+    align-items: center;
+}
+
+.p-1 {
+    padding: 16px;
+}
+
+.ps-1 {
+    padding-left: 16px;
+}
+
+.mt-1 {
+    margin-top: 16px;
+}
+
+.me-1 {
+    margin-right: 16px;
+}
+
+.mb-1 {
+    margin-bottom: 16px;
+}
+
+.bg-light {
+    background-color: whitesmoke;
+    color: #000;
+    border-radius: 5px;
+}
+
+li {
+    list-style: none;
+}
+
+.w-25 {
+    width: 25%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.back-button {
+    width: 48px;
+    height: 48px;
+}
+
+.back-button:hover {
+    cursor: pointer;
+}

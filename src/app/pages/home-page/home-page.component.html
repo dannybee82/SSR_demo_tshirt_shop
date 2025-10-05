@@ -1,0 +1,59 @@
+@if (showLoadingDialog()) {
+    <app-loading-dialog />
+}
+<div class="col main-content">
+    <div class="row p-1 fx-center">
+        <img src="banners/main_banner.png" alt="Main Banner" class="main-banner" title="SSR Demo t-shirt shop">
+    </div>
+    <div class="row fx-center">
+        <div class="row">
+            <div class="col">
+                <a>
+                    <img src="icons/shop-light.png" alt="Women's t-shirts" class="icon-64">
+                </a>                        
+            </div>
+            <div class="col fx-center ps-1">
+                <a>
+                    <h3>Categories</h3>
+                </a>  
+            </div> 
+        </div>
+    </div> 
+    <div class="row fx-center">        
+        <div class="col">
+            <ul>
+                <li>
+                    <div class="row">
+                        <div class="col">
+                            <a [routerLink]="['category', 1]" (click)="this.showLoadingDialog.set(true)">
+                                <img src="icons/t-shirt-pink.png" alt="Women's t-shirts">
+                            </a>                        
+                        </div>
+                        <div class="col fx-center ps-1">
+                            <a [routerLink]="['category', 1]" (click)="this.showLoadingDialog.set(true)">
+                                <strong>Women's T-Shirts</strong>
+                            </a>  
+                        </div>                    
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col">
+                            <a [routerLink]="['category', 2]" (click)="this.showLoadingDialog.set(true)">
+                                <img src="icons/t-shirt-grey.png" alt="Men's t-shirts">
+                            </a>  
+                        </div>
+                        <div class="col fx-center ps-1">
+                            <a [routerLink]="['category', 2]" (click)="this.showLoadingDialog.set(true)">
+                                <strong>Men's T-Shirts</strong>
+                            </a>  
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+    <div class="row p-1 fx-center">
+        <img src="banners/colorfull_tshirts.jpg" alt="Colorfull t-shirts" class="colorfull-shirts">
+    </div>
+</div>

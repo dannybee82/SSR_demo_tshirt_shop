@@ -1,0 +1,20 @@
+.loading-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(38, 38, 38, 0.8);
+    z-index: 25;
+    top: 0;
+    left: 0;
+}
+
+.loading-content {
+  position: absolute;
+  top: 40%;
+  left: 45%;
+}
+
+.hourglass-icon {
+  width: 48px;
+  height: 48px;
+}
