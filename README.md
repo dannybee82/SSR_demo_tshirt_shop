@@ -1,13 +1,13 @@
 # SSRDemoTShirtShop
 
-An _Angular 20 SSR application_ (with [Angular CLI](https://github.com/angular/angular-cli) version 20.3.4) that demonstrates **Server Side Rendering** (SSR).  
+An _Angular 21 SSR application_ (with [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0) that demonstrates **Server Side Rendering** (SSR).  
 The application loads the title, meta-title and meta-description dynamically for the category-page and product-page.  
-The example data is hard-coded with Observables.
+The example data is hard-coded with Observables.  
 See the root of this project for example images.
 
 ### **Angular application installation**
 
-**Angular 20** needs a **Node.js** version of at least _20.19.0_
+**Angular 21** needs a **Node.js** version of at least _20.19.0_
 
 **Command to install**
 
@@ -59,7 +59,16 @@ Note: the normal application runs on: http://localhost:4200
 
 ### **Changelog:**
 
-_Ocotber 2025_
+_November 2025_
+
+\- Upgrade to _Angular 21_ and upgraded other packages.
+
+*   Removed deprecated _Karma_ and installed _Vitest._
+*   Migrated _Jasmine_ tests to _Vitest_ tests for future use (command: **ng generate refactor-jasmine-vitest**).
+
+\- Migrated the application to _Zoneless_ (no use of Zone.js).
+
+_October 2025_
 
 \- First commit.
 
