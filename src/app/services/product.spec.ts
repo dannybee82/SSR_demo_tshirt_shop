@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
+import { Product } from './product';
+import { describe, beforeEach, it, expect } from 'vitest';
 
-import { CategoryResolver } from './category-resolver.service';
-
-describe('CategoryResolver', () => {
-  let service: CategoryResolver;
+describe('Product', () => {
+  let service: Product;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CategoryResolver);
+    service = TestBed.inject(Product);
   });
 
   it('should be created', () => {

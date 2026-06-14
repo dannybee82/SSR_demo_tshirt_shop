@@ -1,22 +1,22 @@
 import { Component, inject, makeStateKey, OnInit, signal, TransferState, WritableSignal } from '@angular/core';
-import { SetMetaTags } from '../../shared/set-meta-tags.component';
+import { SetMetaTags } from '../../shared/set-meta-tags';
 import { ActivatedRoute, Data, RouterModule } from '@angular/router';
-import { Product } from '../../models/product/product.interface';
-import { LoadingDialogComponent } from '../../components/loading-dialog/loading-dialog.component';
+import { ProductInterface } from '../../models/product/product.interface';
+import { LoadingDialog } from '../../components/loading-dialog/loading-dialog';
 import { CurrencyPipe } from '@angular/common';
-import { HomeLogoComponent } from '../../components/home-logo/home-logo.component';
+import { HomeLogo } from '../../components/home-logo/home-logo';
 
-const PRODUCT__KEY = makeStateKey<Product>('product');
+const PRODUCT__KEY = makeStateKey<ProductInterface>('product');
 
 @Component({
   selector: 'app-product',
-  imports: [RouterModule, LoadingDialogComponent, CurrencyPipe, HomeLogoComponent],
-  templateUrl: './product.component.html',
-  styleUrl: './product.component.scss'
+  imports: [RouterModule, LoadingDialog, CurrencyPipe, HomeLogo],
+  templateUrl: './product.html',
+  styleUrl: './product.scss'
 })
-export class ProductComponent extends SetMetaTags implements OnInit {
+export class Product extends SetMetaTags implements OnInit {
 
-  product: WritableSignal<Product | undefined> = signal(undefined);
+  product: WritableSignal<ProductInterface | undefined> = signal(undefined);
 
   private transferState = inject(TransferState);
   private activatedRoute = inject(ActivatedRoute);
@@ -30,7 +30,7 @@ export class ProductComponent extends SetMetaTags implements OnInit {
     } else {
       // Fetch data (only happens on client if not SSR)
       this.activatedRoute.data.subscribe((data: Data) => {
-      const product: Product = data['product'];
+      const product: ProductInterface = data['product'];
 
       if(product) {
           this.setMetaTags(product);

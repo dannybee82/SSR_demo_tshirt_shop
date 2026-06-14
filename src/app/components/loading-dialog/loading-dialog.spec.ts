@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { LoadingDialog } from './loading-dialog';
+import { describe, beforeEach, it, expect } from 'vitest';
 
-import { HomePageComponent } from './home-page.component';
-
-describe('HomePageComponent', () => {
-  let component: HomePageComponent;
-  let fixture: ComponentFixture<HomePageComponent>;
+describe('LoadingDialogComponent', () => {
+  let component: LoadingDialog;
+  let fixture: ComponentFixture<LoadingDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomePageComponent]
+      imports: [LoadingDialog]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HomePageComponent);
+    fixture = TestBed.createComponent(LoadingDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

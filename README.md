@@ -1,13 +1,13 @@
 # SSRDemoTShirtShop
 
-An _Angular 21 SSR application_ (with [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0) that demonstrates **Server Side Rendering** (SSR).  
+An _Angular 22 SSR application_ (with [Angular CLI](https://github.com/angular/angular-cli) version 22.0.1) that demonstrates **Server Side Rendering** (SSR).  
 The application loads the title, meta-title and meta-description dynamically for the category-page and product-page.  
 The example data is hard-coded with Observables.  
 See the root of this project for example images.
 
 ### **Angular application installation**
 
-**Angular 21** needs a **Node.js** version of at least _20.19.0_
+**Angular 22** needs a **Node.js** version of at least _22.22.3_
 
 **Command to install**
 
@@ -58,6 +58,24 @@ _ng s --o_
 Note: the normal application runs on: http://localhost:4200
 
 ### **Changelog:**
+
+_June 2026_
+
+\- Upgrade to _Angular 22_ and upgraded other packages.
+
+\- Migrated _@Injectable_ to _@Service_.
+
+\- Using the default: _ChangeDetectionStrategy.OnPush_ in stead of _ChangeDetectionStrategy.Eager_.
+
+\- Using the latest file naming conventions - and deleting the old schematics from _angular.json_
+
+\- Added a section in _angular.json_ under _architect -> build -> options ->_ _security -> allowedHosts_
+
+\- Also added the lines at the top of _server.ts_ for **development mode only**:
+
+`// Note: Use the line here below only for Development mode [!].`
+
+`process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';`
 
 _November 2025_
 

@@ -1,13 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 import { delay, Observable } from 'rxjs';
-import { Product } from '../models/product/product.interface';
+import { ProductInterface } from '../models/product/product.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ProductService {
+@Service()
+export class Product {
   
-  private _products: Product[] = [
+  private _products: ProductInterface[] = [
     {
       id: 1,
       name: 'Black T-Shirt',
@@ -170,8 +168,8 @@ export class ProductService {
     },
   ];
 
-  getProductsBycategory(categoryId: number): Observable<Product[]> {
-    const data$ = new Observable<Product[]>(observer => {
+  getProductsBycategory(categoryId: number): Observable<ProductInterface[]> {
+    const data$ = new Observable<ProductInterface[]>(observer => {
       observer.next(this._products.filter(item => item.categoryId === categoryId));
       observer.complete();
     });
@@ -181,8 +179,8 @@ export class ProductService {
     );
   }
 
-  getProductById(id: number): Observable<Product | undefined> {
-    const data$ = new Observable<Product| undefined>(observer => {
+  getProductById(id: number): Observable<ProductInterface | undefined> {
+    const data$ = new Observable<ProductInterface| undefined>(observer => {
       observer.next(this._products.find(item => item.id === id) ?? undefined);
       observer.complete();
     });

@@ -1,23 +1,23 @@
 import { Routes } from '@angular/router';
-import { CategoryResolver } from './services/category-resolver.service';
-import { CategoryComponent } from './pages/category/category.component';
-import { ProductComponent } from './pages/product/product.component';
-import { ProductResolver } from './services/product-resolver.service';
-import { HomePageComponent } from './pages/home-page/home-page.component';
+import { CategoryResolver } from './services/category-resolver';
+import { Category } from './pages/category/category';
+import { Product } from './pages/product/product';
+import { ProductResolver } from './services/product-resolver';
+import { HomePage } from './pages/home-page/home-page';
 
 export const routes: Routes = [
     {
         path: '',
-        component: HomePageComponent
+        component: HomePage
     },
     {
         path: 'category/:id',
-        component: CategoryComponent,
+        component: Category,
         resolve: { category: CategoryResolver }
     },
     {
         path: 'product/:id',
-        component: ProductComponent,
+        component: Product,
         resolve: { product: ProductResolver }
     }
 ];

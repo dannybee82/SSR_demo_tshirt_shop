@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SetMetaTags } from '../../shared/set-meta-tags.component';
+import { SetMetaTags } from '../../shared/set-meta-tags';
 import { BasicData } from '../../models/shared/basic-data.interface';
-import { LoadingDialogComponent } from '../../components/loading-dialog/loading-dialog.component';
+import { LoadingDialog } from '../../components/loading-dialog/loading-dialog';
 
 @Component({
   selector: 'app-home-page',
-  imports: [RouterModule, LoadingDialogComponent],
-  templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.scss'
+  imports: [RouterModule, LoadingDialog],
+  templateUrl: './home-page.html',
+  styleUrl: './home-page.scss'
 })
-export class HomePageComponent extends SetMetaTags implements OnInit {
+export class HomePage extends SetMetaTags implements OnInit {
 
   ngOnInit(): void {
     const metaData: BasicData = {

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-
-import { ProductResolver } from './product-resolver.service';
+import { ProductResolver } from './product-resolver';
+import { describe, beforeEach, it, expect } from 'vitest';
 
 describe('ProductResolver', () => {
   let service: ProductResolver;

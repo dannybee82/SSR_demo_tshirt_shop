@@ -1,13 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Category } from '../models/category/category.interface';
+import { Service } from '@angular/core';
+import { CategoryInterface } from '../models/category/category.interface';
 import { delay, Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class CategoryService {
+@Service()
+export class Category {
   
-  private _categories: Category[] = [
+  private _categories: CategoryInterface[] = [
     {
       id: 1,
       name: 'Women\'s t-shirts',
@@ -24,8 +22,8 @@ export class CategoryService {
     }    
   ];
 
-  getCategory(id: number): Observable<Category | undefined> {
-    const data$ = new Observable<Category| undefined>(observer => {
+  getCategory(id: number): Observable<CategoryInterface | undefined> {
+    const data$ = new Observable<CategoryInterface| undefined>(observer => {
       observer.next(this._categories.find(item => item.id === id) ?? undefined);
       observer.complete();
     });

@@ -1,16 +1,18 @@
-import {
-  AngularNodeAppEngine,
-  createNodeRequestHandler,
-  isMainModule,
-  writeResponseToNodeResponse,
-} from '@angular/ssr/node';
-import express from 'express';
-import { join } from 'node:path';
+// Note: Use the line here below only for Development mode [!].
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
-const browserDistFolder = join(import.meta.dirname, '../browser');
+import { AngularNodeAppEngine, createNodeRequestHandler, isMainModule, writeResponseToNodeResponse } from '@angular/ssr/node';
+import express from 'express';
+import { dirname, resolve } from 'node:path';  
+import { fileURLToPath } from 'node:url';
+
+const serverDistFolder = dirname(fileURLToPath(import.meta.url));  
+const browserDistFolder = resolve(serverDistFolder, '../browser');
 
 const app = express();
-const angularApp = new AngularNodeAppEngine();
+const angularApp = new AngularNodeAppEngine({
+  trustProxyHeaders: ['x-forwarded-host', 'x-forwarded-proto', 'x-forwarded-for', 'x-forwarded-prefix', 'x-forwarded-server', 'x-forwarded-port'], // Trust specific headers
+});
 
 /**
  * Example Express Rest API endpoints can be defined here.
@@ -32,6 +34,7 @@ app.use(
     maxAge: '1y',
     index: false,
     redirect: false,
+    fallthrough: true,
   }),
 );
 

@@ -1,30 +1,30 @@
 import { Component, makeStateKey, TransferState, OnInit, inject, WritableSignal, signal } from '@angular/core';
-import { SetMetaTags } from '../../shared/set-meta-tags.component';
+import { SetMetaTags } from '../../shared/set-meta-tags';
 import { ActivatedRoute, Data, RouterModule } from '@angular/router';
-import { Category } from '../../models/category/category.interface';
-import { ProductService } from '../../services/product.service';
-import { Product } from '../../models/product/product.interface';
-import { LoadingDialogComponent } from '../../components/loading-dialog/loading-dialog.component';
+import { CategoryInterface } from '../../models/category/category.interface';
+import { Product } from '../../services/product';
+import { ProductInterface } from '../../models/product/product.interface';
+import { LoadingDialog } from '../../components/loading-dialog/loading-dialog';
 import { CurrencyPipe } from '@angular/common';
-import { HomeLogoComponent } from '../../components/home-logo/home-logo.component';
+import { HomeLogo } from '../../components/home-logo/home-logo';
 
-const CATEGORY__KEY = makeStateKey<Category>('category');
+const CATEGORY__KEY = makeStateKey<CategoryInterface>('category');
 
 @Component({
   selector: 'app-category',
-  imports: [RouterModule, LoadingDialogComponent, CurrencyPipe, HomeLogoComponent],
-  templateUrl: './category.component.html',
-  styleUrl: './category.component.scss'
+  imports: [RouterModule, LoadingDialog, CurrencyPipe, HomeLogo],
+  templateUrl: './category.html',
+  styleUrl: './category.scss'
 })
-export class CategoryComponent extends SetMetaTags implements OnInit {
+export class Category extends SetMetaTags implements OnInit {
 
-  category: WritableSignal<Category | undefined> = signal(undefined);
-  products: WritableSignal<Product[]> = signal([]);
+  category: WritableSignal<CategoryInterface | undefined> = signal(undefined);
+  products: WritableSignal<ProductInterface[]> = signal([]);
   backgroundGradient: WritableSignal<string> = signal('');
 
   private transferState = inject(TransferState);
   private activatedRoute = inject(ActivatedRoute);
-  private productService = inject(ProductService);
+  private productService = inject(Product);
 
   ngOnInit(): void {
     // Check if data exists from server - prevent duplicate requests.
@@ -38,7 +38,7 @@ export class CategoryComponent extends SetMetaTags implements OnInit {
 
       // Fetch data (only happens on client if not SSR)
       this.activatedRoute.data.subscribe((data: Data) => {
-      const category: Category = data['category'];
+      const category: CategoryInterface = data['category'];
 
       if(category) {
           this.setMetaTags(category);
@@ -55,7 +55,7 @@ export class CategoryComponent extends SetMetaTags implements OnInit {
 
   private getProducts(categoryId: number): void {
     this.productService.getProductsBycategory(categoryId).subscribe({
-      next: (products: Product[]) => {
+      next: (products: ProductInterface[]) => {
         this.products.set(products);
       },
       error: () => {
