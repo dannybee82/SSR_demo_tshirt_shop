@@ -1,0 +1,15 @@
+services:
+  ssr_demo_tshirt_shop_angular:
+    hostname: angularapp
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    container_name: ssr_demo_tshirt_shop_angular
+    restart: unless-stopped
+    networks:
+      - angular-app
+    ports:
+      - "80:80"
+networks:
+  angular-app:
+    driver: bridge

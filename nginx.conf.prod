@@ -1,0 +1,94 @@
+# nginx.conf.prod
+# Reverse proxy for Angular 19 SSR (Node) + C#/.NET backend
+# Runs INSIDE the container on EasyPanel (Docker/Linux).
+
+worker_processes auto;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    sendfile        on;
+    keepalive_timeout  65;
+
+    # Gzip compression for SSR HTML + assets
+    gzip              on;
+    gzip_vary         on;
+    gzip_proxied      any;
+    gzip_comp_level   6;
+    gzip_types        text/plain text/css application/json application/javascript
+                      text/xml application/xml application/xml+rss text/javascript
+                      image/svg+xml;
+
+    # --- Upstreams ---
+    # Node SSR server (your Angular app)
+    upstream angular_ssr {
+        server 127.0.0.1:4000;
+        keepalive 32;
+    }
+
+    # Trust EasyPanel's Traefik as the real client source.
+    # Adjust to EasyPanel's internal Docker subnet if you want to be strict.
+    set_real_ip_from 0.0.0.0/0;
+    real_ip_header   X-Forwarded-For;
+    real_ip_recursive on;
+
+    server {
+        listen 80;
+        server_name _;
+
+        # Security headers
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header X-Frame-Options "SAMEORIGIN" always;
+        add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+        # Max upload size (tune for your API)
+        client_max_body_size 25m;
+
+        location = /robots.txt {
+            root /usr/src/app/dist/browser;
+            try_files /robots.txt @ssr;   # fallback if file missing
+            add_header Cache-Control "public, max-age=3600";
+            access_log off;
+        }
+        
+        # ---- Static Angular browser assets (optional fast path) ----
+        # Serves hashed assets directly from disk, bypassing Node for speed.
+        location ~* \.(?:css|js|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|webp|ico|map)$ {
+            root /usr/src/app/dist/browser;
+            try_files $uri @ssr;
+            expires 1y;
+            add_header Cache-Control "public, immutable";
+            access_log off;
+        }
+
+        # ---- Everything else -> Angular SSR (Node) ----
+        location / {
+            try_files $uri @ssr;
+        }
+
+        location @ssr {
+            proxy_pass http://angular_ssr;
+            proxy_http_version 1.1;
+
+            # These are the x-forwarded headers your server.ts trusts:
+            proxy_set_header Host               $host;
+            proxy_set_header X-Real-IP          $remote_addr;
+            proxy_set_header X-Forwarded-For    $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto  $scheme;
+            proxy_set_header X-Forwarded-Host   $host;
+            proxy_set_header X-Forwarded-Port   $server_port;
+            proxy_set_header X-Forwarded-Server $host;
+            proxy_set_header X-Forwarded-Prefix "";
+
+            proxy_set_header Connection "";
+
+            # SSR can be slow on cold render; give it room.
+            proxy_read_timeout 60s;
+        }
+    }
+}

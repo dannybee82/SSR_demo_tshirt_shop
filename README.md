@@ -1,13 +1,39 @@
 # SSRDemoTShirtShop
 
-An _Angular 22 SSR application_ (with [Angular CLI](https://github.com/angular/angular-cli) version 22.0.1) that demonstrates **Server Side Rendering** (SSR).  
+An _Angular 22 SSR application_ (with [Angular CLI](https://github.com/angular/angular-cli) version 22.2.5) that demonstrates **Server Side Rendering** (SSR).  
 The application loads the title, meta-title and meta-description dynamically for the category-page and product-page.  
 The example data is hard-coded with Observables.  
 See the root of this project for example images.
 
-### **Angular application installation**
+## Running the application
 
-**Angular 22** needs a **Node.js** version of at least _22.22.3_
+### _1\. Docker Desktop / Docker_
+
+To see the application in action within a _Docker Container_, use the command from the root of this project:
+
+**docker compose up --build -d**
+
+Commands to see Server Side Rendering (SSR) in action with the _Docker Container:_
+
+**From a CMD-prompt:**
+
+curl -s "http://localhost:80"
+
+curl -s "http://localhost:80/category/1"
+
+curl -s "http://localhost:80/product/1"
+
+**From the VS Code teriminal:**
+
+curl.exe -s "http://localhost:80"
+
+curl.exe -s "http://localhost:80/category/1"
+
+curl.exe -s "http://localhost:80/product/1"
+
+### _2\. Local installation of the Angular application_
+
+**Angular 22** needs a **Node.js** version of at least _22.22.3_. (Better is version 22.23.4 for security fixes).
 
 **Command to install**
 
@@ -30,7 +56,8 @@ The command here above creates a _/dist/_ folder with 2 bundles: 1 for the serve
 This will start the server at _http://localhost:4000_
 
 Note **curl** is native on _Windows_ and pre-installed on _macOS_.  
-But for _Linux_ **curl** is available via package managers.  
+But for _Linux_ **curl** is available via package managers.
+
 To see the title, meta-title and meta-description in action - use **curl** commands:
 
 **From a CMD-prompt:**  
@@ -58,6 +85,14 @@ _ng s --o_
 Note: the normal application runs on: http://localhost:4200
 
 ### **Changelog:**
+
+_October 2026_
+
+\- Upgraded packages.
+
+\- Fixes for CSS and responsiveness.
+
+\- Dockerized the whole application (using node:22.23.4-alpine for security fixes).
 
 _June 2026_
 

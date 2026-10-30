@@ -18,3 +18,31 @@
     width: 64px;
     height: 64px;
 }
+
+.w-f-205px {
+    width: 205px!important;
+}
+
+@media (min-width: 600px) and (max-width: 800px) {
+    img.main-banner {
+        width: 600px;
+        height: auto;
+    }
+
+    img.colorfull-shirts {
+        width: 600px;
+        height: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    img.main-banner {
+        width: 480px;
+        height: auto;
+    }
+
+    img.colorfull-shirts {
+        width: 480px;
+        height: auto;
+    }
+}

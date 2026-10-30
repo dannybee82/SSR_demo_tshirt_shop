@@ -6,10 +6,18 @@
     background: linear-gradient(to bottom, #000, #1a1a1a, #333, #4d4d4d, #666, #999, #b3b3b3, #ccc, #ffff);
 }
 
+.category-container {
+    justify-content: center;
+}
+
 .category-banner {
     width: auto;
-    height: 250px;
+    height: auto;
     border-radius: 5px;
+}
+
+.menu-left {
+    width: 25%;        
 }
 
 .products-grid {
@@ -58,4 +66,96 @@ h3 {
 h4 {
     padding: 0!important;
     margin: 0!important;
+}
+
+@media (min-width: 1280px) and (max-width: 1820px) {
+    .category-container {
+        justify-content: space-evenly!important;
+    }
+
+    .menu-left {
+        width: 20%;        
+    }
+}
+
+@media (min-width: 960px) and (max-width: 1279px) {
+    .category-container {
+        justify-content: space-around!important;
+    }
+
+    .menu-left {
+        width: 25%;
+        margin-right: 32px;       
+    }
+
+    .products-row {
+        margin-right: 16px;
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);    
+        grid-template-rows: repeat(auto, 1fr);
+        grid-column-gap: 8px;
+        grid-row-gap: 8px;
+        padding: 8px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 959px) {
+    .category-container {
+        flex-direction: column!important;
+        justify-content: space-between!important;
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);    
+        grid-template-rows: repeat(auto, 1fr);
+        grid-column-gap: 8px;
+        grid-row-gap: 8px;
+        padding: 8px;
+    }
+
+    .menu-left {
+        padding-left: 16px;
+        padding-right: 16px;
+        width: inherit;
+        justify-content: center;
+    }
+
+    .products-row {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .category-container {
+        flex-direction: column!important;
+        justify-content: center!important;
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);    
+        grid-template-rows: repeat(auto, 1fr);
+        grid-column-gap: 8px;
+        grid-row-gap: 8px;
+        padding: 8px;
+    }
+
+    .menu-left {
+        padding-left: 16px;
+        padding-right: 16px;
+        width: inherit;
+        justify-content: center;
+    }
+
+    .products-row {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+    }
 }

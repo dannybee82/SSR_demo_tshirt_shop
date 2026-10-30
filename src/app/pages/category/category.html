@@ -1,8 +1,9 @@
 @if (showLoadingDialog()) {
     <app-loading-dialog />
-}<div class="category-page" [class]="backgroundGradient()">
-    <div class="row fx-center">
-        <div class="col w-25">
+}
+<div class="category-page" [class]="backgroundGradient()">
+    <div class="category-container row">
+        <div class="menu-left col w-25">
             <app-home-logo></app-home-logo>
             <img src="icons/back-button.png" alt="Back button" [routerLink]="['/']" class="back-button mb-1 mt-1">
              @if(category()) {
@@ -12,7 +13,7 @@
                 </div>
             }
         </div>
-        <div class="col w-50">
+        <div class="products-row col w-50">
             <div class="row fx-center">
                 <div class="products-grid">
                     @if(products().length > 0) {
